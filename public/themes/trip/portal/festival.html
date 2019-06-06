@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$category.name} {$category.seo_title} {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$category.seo_keywords},{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$category.seo_description},{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <hook name="before_head_end"/>
+</head>
+<body class="body-white">
+<include file="public@nav"/>
+<widget name="festival_video">
+<div class="festival">
+    <div class="video">
+        <a class="play" href="#">
+            <span></span>
+            <em></em>
+        </a>
+        <php>
+            $images = [];
+        </php>
+        <div class="video-list hd">
+            <ul>
+                <portal:articles limit="10" order="post.published_time DESC" categoryIds="$widget.vars.video">
+                    <php>
+                        $image = $vo['thumbnail'];
+                        array_push($images,$image);
+                    </php>
+                <li><a href="javascript:void (0)">{$vo.post_title}</a></li>
+                </portal:articles>
+            </ul>
+        </div>
+        <div class="bd">
+            <foreach name="images" item="vo">
+            <ul>
+                <li>
+                    <img src="{:cmf_get_image_url($vo)}" alt="">
+                </li>
+            </ul>
+            </foreach>
+        </div>
+    </div>
+</div>
+</widget>
+<div class="container">
+    <widget name="festival_info">
+    <div class="section latest">
+        <h3>近期最热节日</h3>
+        <div class="list">
+            <ul>
+                <portal:articles limit="10" order="post.published_time DESC" categoryIds="$widget.vars.category_id">
+                <li>
+                    <a href="">
+                        <div class="img">
+                            <img src="{:cmf_get_image_url($vo.thumbnail)}" alt="">
+                        </div>
+                        <p>日期: <span>{$vo.published_time|date="Y-m-d"}</span></p>
+                        <p>地点: </p>
+                    </a>
+                </li>
+                </portal:articles>
+            </ul>
+            <a href="" class="more-info">查看更多>></a>
+        </div>
+    </div>
+    </widget>
+</div>
+<include file="public@footer"/>
+<include file="public@scripts"/>
+<hook name="before_body_end"/>
+
+<script src="__TMPL__/public/assets/js/jquery.SuperSlide.2.1.2.js"></script>
+<script>
+    $(function () {
+        $(".video").slide({effect:"fold",autoPlay:true});
+        $(".play").click(function () {
+            var $this = $(this),
+                videoSrc = $this.attr("data-source");
+            var html = '<div class="video-bg"></div>';
+            html += '<div class="pop-video container"><div id="pop-video"><video src="' + videoSrc + '" controls autoplay></video></div><a class="close-pv" href="javascript:void(0)">X</a></div></div>';
+            $('body').append(html);
+            setTimeout(function () {
+                $(".close-pv").click(function () {
+                    $('.video-bg').remove();
+                    $('.pop-video').remove();
+                });
+            }, 500)
+        });
+    })
+</script>
+</body>
+</html>

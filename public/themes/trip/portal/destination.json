@@ -1,0 +1,50 @@
+{
+    "name": "目的地列表页",
+    "action": "portal/List/index",
+    "description": "目的地表模板文件",
+    "order": 10.0,
+    "more": {
+        "widgets":{
+            "hottest": {
+                "title": "热门目的地",
+                "display": "1",
+                "vars": {
+                    "hottest_articles_category_id": {
+                        "title": "热门目的地分类ID",
+                        "value": "",
+                        "type": "text",
+                        "dataSource": {
+                            "api": "portal/category/index",
+                            "multi": true
+                        },
+                        "placeholder": "请选择分类",
+                        "tip": "",
+                        "rule": {
+                            "require": true
+                        }
+                    }
+                }
+            },
+            "current_hot": {
+                "title": "当季热门",
+                "display": "1",
+                "vars": {
+                    "category_id": {
+                        "title": "目的地分类ID",
+                        "value": "",
+                        "type": "text",
+                        "dataSource": {
+                            "api": "portal/category/index",
+                            "multi": true
+                        },
+                        "placeholder": "请选择分类",
+                        "tip": "",
+                        "rule": {
+                            "require": true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

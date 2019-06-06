@@ -1,0 +1,50 @@
+{
+    "name": "节日首页",
+    "action": "portal/List/index",
+    "description": "节日首页模板文件",
+    "order": 5.0,
+    "more": {
+        "widgets": {
+            "festival_video": {
+                "title": "节日视频",
+                "display": "1",
+                "vars": {
+                    "video": {
+                        "title": "视屏源",
+                        "value": "",
+                        "type": "text",
+                        "dataSource": {
+                            "api": "portal/Category/index",
+                            "multi": true
+                        },
+                        "placeholder": "请选择分类",
+                        "tip": "",
+                        "rule": {
+                            "require": true
+                        }
+                    }
+                }
+            },
+            "festival_info": {
+                "title": "节日信息",
+                "display": "1",
+                "vars": {
+                    "category_id": {
+                        "title": "节日分类ID",
+                        "value": "",
+                        "type": "text",
+                        "dataSource": {
+                            "api": "portal/Category/index",
+                            "multi": true
+                        },
+                        "placeholder": "请选择分类",
+                        "tip": "",
+                        "rule": {
+                            "require": true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
